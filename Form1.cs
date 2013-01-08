@@ -14,10 +14,15 @@ namespace ImageProcessing
         public Form1()
         {
             InitializeComponent();
+
+            openFileDialog1.Title = "Выберите изображение для обработки";
+            
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
+            if (openFileDialog1.ShowDialog() != DialogResult.OK) return;
+            button1.Text = openFileDialog1.FileName;
             label1.Text = DateTime.Now.ToString();
         }
     }
