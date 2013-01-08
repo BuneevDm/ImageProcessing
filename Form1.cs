@@ -16,14 +16,18 @@ namespace ImageProcessing
             InitializeComponent();
 
             openFileDialog1.Title = "Выберите изображение для обработки";
-            
+            openFileDialog1.Filter = "Image Files (*.JPG)|*.jpg";
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (openFileDialog1.ShowDialog() != DialogResult.OK) return;
-            button1.Text = openFileDialog1.FileName;
             label1.Text = DateTime.Now.ToString();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            if (openFileDialog1.ShowDialog() != DialogResult.OK) return;
+            textBox1.Text = openFileDialog1.FileName;
         }
     }
 }
