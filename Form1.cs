@@ -23,22 +23,25 @@ namespace ImageProcessing
 
         private void button1_Click(object sender, EventArgs e)
         {
+            int i = 1;
             progressBar1.Maximum = myImage.Width * myImage.Height;
-            int i = 0;
-            for (int y = 0; y < myImage.Height; y++)
+            for (int y = 1; y < myImage.Height-1; y++)
             {
-                for (int x = 0; x < myImage.Width; x++)
+                for (int x = 1; x < myImage.Width-1; x++)
                 {
                     i++;
                     progressBar1.Value = i;
-                        //myImage.SetPixel(x, y)
-                        int temp = ((myImage.GetPixel(x, y).B + myImage.GetPixel(x, y).R + myImage.GetPixel(x, y).G) / 3) % 255;
-                        Color tc = Color.FromArgb(temp, temp, temp);
-                        myImage.SetPixel(x, y, tc);
+                    int temp = myImage.GetPixel(x + 1, y + 1).R + myImage.GetPixel(x, y + 1).R + myImage.GetPixel(x - 1, y + 1).R +
+                        myImage.GetPixel(x + 1, y).R + myImage.GetPixel(x, y).R + myImage.GetPixel(x - 1, y).R +
+                        myImage.GetPixel(x + 1, y - 1).R + myImage.GetPixel(x, y - 1).R + myImage.GetPixel(x - 1, y - 1).R;
+                    temp = temp / 9;
+                    Color tc = Color.FromArgb(temp, temp, temp);
+                    myImage.SetPixel(x, y, tc);
                 }
             }
 
             pictureBox1.Image = (Image)myImage;
+            Refresh();
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -46,7 +49,7 @@ namespace ImageProcessing
             if (openFileDialog1.ShowDialog() != DialogResult.OK) return;
             textBox1.Text = openFileDialog1.FileName;
 
-            myImage = new Bitmap(textBox1.Text);
+            myImage = Filters.GreyColors(new Bitmap(textBox1.Text));
             pictureBox1.Image = (Image)myImage;
         }
     }
