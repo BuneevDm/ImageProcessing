@@ -52,5 +52,11 @@ namespace ImageProcessing
             myImage = Filters.GreyColors(new Bitmap(textBox1.Text));
             pictureBox1.Image = (Image)myImage;
         }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            myImage = Filters.NewFilter(new Bitmap(textBox1.Text));
+            pictureBox1.Image = (Image)myImage;
+        }
     }
 }
