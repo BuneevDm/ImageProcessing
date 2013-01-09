@@ -23,21 +23,14 @@ namespace ImageProcessing
 
         private void button1_Click(object sender, EventArgs e)
         {
-            progressBar1.Maximum = myImage.Height * myImage.Width;
-            int i = 0;
-            for (int y = 0; y < myImage.Height; y++)
+            for (int y = 25; y < myImage.Height - 25; y++)
             {
-                for (int x = 0; x < myImage.Width; x++)
+                for (int x = 25; x < myImage.Width - 25; x++)
                 {
-                    i++;
-                    progressBar1.Value = i;
-                    if ((myImage.GetPixel(x, y).B + myImage.GetPixel(x, y).R + myImage.GetPixel(x, y).G) < 255)
-                    {
                         //myImage.SetPixel(x, y)
-                        //int temp = ((myImage.GetPixel(x, y).B + myImage.GetPixel(x, y).R + myImage.GetPixel(x, y).G) / 3) % 255;
-                        Color tc = Color.FromArgb(255, 255, myImage.GetPixel(x, y).B);
+                        int temp = ((myImage.GetPixel(x, y).B + myImage.GetPixel(x, y).R + myImage.GetPixel(x, y).G) / 3) % 255;
+                        Color tc = Color.FromArgb(temp, temp, temp);
                         myImage.SetPixel(x, y, tc);
-                    }
                 }
             }
 
